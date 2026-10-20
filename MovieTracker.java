@@ -22,18 +22,30 @@ public class MovieTracker {
      * If the user is new, an empty set is created for them first.
      */
     public void addMovie(String userName, Movie movie) {
+        // Create new empty set if username isn't found
+        if(!watchedMovies.containsKey(userName)) {
+            watchedMovies.put(userName, new HashSet<Movie>());
+        }
+        // Add movie to hashset associated with userName
+        watchedMovies.get(userName).add(movie);
     }
 
     /**
      * getMovies returns the set of movies the given user has watched.
      */
     public HashSet<Movie> getMovies(String userName) {
+        return watchedMovies.get(userName);
     }
 
     /**
      * hasWatched checks whether the given user has watched the given movie.
      */
     public boolean hasWatched(String userName, Movie movie) {
+        if(watchedMovies.get(userName).contains(movie)) {
+            return true;
+        }
+
+        return false;
         
     }
 
